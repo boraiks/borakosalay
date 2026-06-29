@@ -1,59 +1,88 @@
-/* fabiensanglard.net tarzı: beyaz zemin, kalın sans-serif, düz liste.
-   Renkleri buradan değiştirebilirsin. */
+/* fabiensanglard tarzı + daktilo (monospace) ana font + açık/koyu tema.
+   Renkleri ve fontu buradan değiştirebilirsin. */
 :root{
-  --bg:#ffffff;       /* zemin (beyaz) */
-  --ink:#141414;      /* ana metin */
-  --muted:#666666;    /* filtre/ikincil metin */
-  --rule:#cccccc;     /* ince çizgiler */
-  --sans:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  --bg:#ffffff;       /* zemin (açık tema) */
+  --ink:#1a1a1a;      /* ana metin */
+  --muted:#6a6a6a;    /* filtre/ikincil metin */
+  --rule:#cfcfcf;     /* ince çizgiler */
+  --mono:"Courier Prime","Courier New",Courier,monospace;
   color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#181818;
+  --ink:#e6e6e6;
+  --muted:#9a9a9a;
+  --rule:#3a3a3a;
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:var(--sans); font-size:17px; line-height:1.5;
+  font-family:var(--mono); font-size:16px; line-height:1.55;
+  transition:background-color .2s ease, color .2s ease;
   -webkit-font-smoothing:antialiased;
 }
-.paper{max-width:860px; margin:0 auto; padding:2.5rem 1.5rem 5rem}
+.paper{max-width:880px; margin:0 auto; padding:2.5rem 1.5rem 5rem}
 a{color:inherit; text-decoration:none}
-:focus-visible{outline:2px solid #000; outline-offset:2px}
+:focus-visible{outline:2px solid var(--ink); outline-offset:2px}
 
-/* başlık satırı */
-.site-head{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.6rem}
-.site-head h1{margin:0; font-size:1.7rem; font-weight:700; text-transform:uppercase; letter-spacing:.01em; line-height:1.15}
-.links{display:flex; gap:.85rem; flex-shrink:0; padding-top:.4rem}
-.links a{color:#555; display:inline-flex}
-.links a:hover{color:#000}
-.links svg{width:21px; height:21px; fill:currentColor}
+/* başlık + bağlantılar + tema anahtarı */
+.site-head{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.8rem}
+.identity{display:flex; flex-direction:column; gap:.35rem}
+.identity h1{margin:0; font-size:1.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.02em; line-height:1.2}
+.links{display:flex; flex-wrap:wrap; gap:.9rem; font-size:.9rem}
+.links a:hover{text-decoration:underline; text-underline-offset:2px}
+
+.theme-toggle{
+  appearance:none; flex-shrink:0; cursor:pointer; padding:0;
+  width:46px; height:26px; border-radius:999px;
+  border:1px solid var(--rule); background:var(--bg); position:relative;
+  transition:border-color .2s ease;
+}
+.theme-toggle .knob{
+  position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
+  background:var(--ink); transition:transform .2s ease;
+}
+:root[data-theme="dark"] .theme-toggle .knob{transform:translateX(20px)}
 
 /* giriş paragrafı */
-.intro{margin:0 0 2rem; max-width:64ch}
+.intro{margin:0 0 2rem; max-width:70ch}
 
-/* filtre çubuğu (sade) */
-.controls{margin:0 0 1.4rem}
-.filters{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1.3rem; font-size:.85rem}
-.tagbar{display:flex; flex-wrap:wrap; gap:.25rem 1rem; align-items:center}
-.chip{background:none; border:0; padding:0; font:inherit; cursor:pointer; display:inline-flex; align-items:center; gap:.4em; color:var(--muted); line-height:1.4}
-.chip .dot{width:.55em; height:.55em; border-radius:50%; background:var(--c); flex-shrink:0}
-.chip .lbl{color:var(--c)}
-.chip[aria-pressed="true"] .lbl{font-weight:700; text-decoration:underline; text-underline-offset:2px}
+/* filtre çubuğu */
+.controls{margin:0 0 1.5rem}
+.filters{display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.3rem; font-size:.9rem}
+.tagbar{display:flex; flex-wrap:wrap; gap:.4rem}
 .meta{display:flex; align-items:center; gap:1.2rem; margin-left:auto; color:var(--muted)}
 .meta button{background:none; border:0; padding:0; font:inherit; color:var(--muted); cursor:pointer}
-.meta button:hover{color:#000}
+.meta button:hover{color:var(--ink)}
 .count{white-space:nowrap}
+
+/* etiket kutucukları (hem filtrede hem listede) */
+.tag,.chip{
+  display:inline-flex; align-items:center; gap:.4em;
+  padding:.1em .5em; border:1px solid var(--c); border-radius:3px;
+  background:color-mix(in srgb, var(--c) 12%, transparent);
+  font-size:.8em; line-height:1.4; white-space:nowrap; vertical-align:middle;
+}
+.tag .dot,.chip .dot{width:.5em; height:.5em; border-radius:50%; background:var(--c); flex-shrink:0}
+.tag .lbl,.chip .lbl{color:var(--c)}
+.chip{font-family:inherit; cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--c); border-color:var(--c)}
+.chip[aria-pressed="true"] .lbl{color:#fff}
+.chip[aria-pressed="true"] .dot{background:#fff}
 
 /* kategori bölümleri (kalın büyük harf başlık + çizgi) */
 .cat-section{margin-top:2rem}
-.cat-head{margin:0 0 .45rem; padding-bottom:.35rem; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.02em; border-bottom:1px solid var(--rule)}
+.cat-head{margin:0 0 .5rem; padding-bottom:.35rem; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; border-bottom:1px solid var(--rule)}
 
-/* satırlar — düz liste */
-.entry{padding:.16rem 0; line-height:1.55}
+/* satırlar */
+.entry{padding:.22rem 0; line-height:1.75}
 .entry .date{color:var(--ink)}
-.entry .tag{display:inline-flex; align-items:center; gap:.35em; margin-right:.5em; vertical-align:baseline}
-.entry .tag .dot{width:.5em; height:.5em; border-radius:50%; background:var(--c); display:inline-block; flex-shrink:0}
-.entry .tag .lbl{color:var(--c); font-size:.86em}
-.entry .title{font-weight:700}
+.entry .tag{margin:0 .15em}
+.entry .title{font-weight:700; margin-left:.15em}
 .entry .title:hover{text-decoration:underline; text-underline-offset:2px}
 
 .empty{color:var(--muted); padding:1.5rem 0}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}

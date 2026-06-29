@@ -13,6 +13,17 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
 
+/* açık / koyu tema anahtarı (varsayılan: açık) */
+const themeBtn = $('theme');
+if (themeBtn) {
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.removeAttribute('data-theme'); themeBtn.setAttribute('aria-pressed', 'false'); }
+    else { root.setAttribute('data-theme', 'dark'); themeBtn.setAttribute('aria-pressed', 'true'); }
+  });
+}
+
 function tagHTML(t) {
   const c = tagColors[t] || '#777777';
   return `<span class="tag" style="--c:${c}"><span class="dot"></span><span class="lbl">${esc(t)}</span></span>`;
