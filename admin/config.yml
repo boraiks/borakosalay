@@ -43,6 +43,7 @@ collections:
                 fields:
                   - { label: Label, name: label, widget: string, hint: "e.g. Source, Demo, Paper" }
                   - { label: URL, name: url, widget: string }
+              - { label: "3D model (.glb / .gltf)", name: model, widget: file, required: false, hint: "Optional .glb. Shows at the top by default; to place it elsewhere, type {{model}} on its own line in the Body." }
               - { label: Body, name: body, widget: markdown, required: false, hint: "Description, images, code, embedded video" }
 
   - name: tags

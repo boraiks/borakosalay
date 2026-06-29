@@ -1,6 +1,3 @@
-/* Projects and tags are loaded from the JSON files in /data.
-   You edit them from the /admin panel. Categories are fixed (4 of them). */
-
 const categories = ['Software', 'Hardware', 'Concepts', 'Article'];
 
 let projects = [];

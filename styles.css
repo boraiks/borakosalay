@@ -1,5 +1,3 @@
-/* Whole site uses DejaVu Sans Mono — the same font fabiensanglard.net uses ("fabfont").
-   Self-hosted from /fonts so it looks identical on every OS. */
 @font-face{
   font-family:"DejaVu Sans Mono";
   src:url("fonts/DejaVuSansMono.woff2") format("woff2");

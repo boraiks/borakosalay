@@ -1,6 +1,3 @@
-/* Detail page: reads ?p=<slug> from the URL, finds the matching project
-   in data/projects.json, and renders its title, date, tags, Markdown body and links. */
-
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
@@ -67,13 +64,24 @@ async function load() {
         ).join('') + `</div>`
       : '';
 
-    const bodyHTML = p.body
-      ? `<div class="project-body">${renderMarkdown(p.body)}</div>`
+    // 3D model (optional): build Google's <model-viewer> from the uploaded file.
+    const modelTag = p.model
+      ? `<model-viewer src="${esc(p.model)}" camera-controls auto-rotate shadow-intensity="1" alt="${esc(p.title)} — 3D model"></model-viewer>`
       : '';
+
+    // Render the body, then let a {{model}} placeholder choose where the viewer goes.
+    let body = p.body ? renderMarkdown(p.body) : '';
+    if (modelTag) body = body.replace(/<p>\s*\{\{\s*model\s*\}\}\s*<\/p>/ig, modelTag); // {{model}} on its own line
+    body = body.replace(/\{\{\s*model\s*\}\}/ig, ''); // drop any leftover placeholder text
+    body = body.replace(/<p>\s*<\/p>/g, ''); // tidy up any empty paragraph left behind
+
+    const placedInline = modelTag && body.includes('<model-viewer');
+    const bodyHTML = body ? `<div class="project-body">${body}</div>` : '';
 
     $('project').innerHTML =
       `<h1 class="project-title">${esc(p.title)}</h1>`
       + `<div class="project-meta"><span class="date">${fmtDate(p.date)}</span> ${tags}<span class="cat">${esc(p.category)}</span></div>`
+      + (placedInline ? '' : modelTag)   // top by default; skipped if placed inline via {{model}}
       + bodyHTML
       + linksHTML;
 
