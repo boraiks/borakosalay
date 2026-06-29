@@ -23,7 +23,17 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
               - { label: Category, name: category, widget: select, options: [Software, Hardware, Concepts, Article] }
-              - { label: Tags, name: tags, widget: list }
+              - label: Tags
+                name: tags
+                widget: relation
+                collection: tags
+                file: tags_list
+                value_field: "items.*.name"
+                search_fields: ["items.*.name"]
+                display_fields: ["items.*.name"]
+                multiple: true
+                required: false
+                options_length: 10000
               - { label: "Link (optional)", name: url, widget: string, required: false, default: "#" }
 
   - name: tags
