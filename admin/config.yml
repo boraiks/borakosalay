@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: KULLANICI_ADIN/borakosalay   # <-- buradaki KULLANICI_ADIN'ı kendi GitHub kullanıcı adınla değiştir
+  repo: repo: boraiks/borakosalay 
   branch: main
 
 media_folder: "images/uploads"
