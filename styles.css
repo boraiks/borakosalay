@@ -1,10 +1,8 @@
-/* fabiensanglard-style + monospace (typewriter) main font + light/dark theme.
-   Change the colors and the font here. */
 :root{
-  --bg:#ffffff;       /* background (light theme) */
-  --ink:#1a1a1a;      /* main text */
-  --muted:#6a6a6a;    /* filter / secondary text */
-  --rule:#cfcfcf;     /* hairlines */
+  --bg:#ffffff;     
+  --ink:#1a1a1a;      
+  --muted:#6a6a6a;    
+  --rule:#cfcfcf;   
   --mono:"Courier Prime","Courier New",Courier,monospace;
   color-scheme:light;
 }

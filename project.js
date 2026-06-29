@@ -1,6 +1,3 @@
-/* Detail page: reads ?p=<slug> from the URL, finds the matching project
-   in data/projects.json, and renders its title, date, tags, Markdown body and links. */
-
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
@@ -12,14 +9,17 @@ const slugify = s => String(s)
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/^-+|-+$/g, '');
 
-/* light / dark theme toggle (default: light) */
+/* light / dark theme toggle — remembers the last choice in localStorage */
 const themeBtn = $('theme');
 if (themeBtn) {
+  const root = document.documentElement;
+  // sync the button to whatever theme is already applied (set pre-paint in <head>)
+  themeBtn.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
   themeBtn.addEventListener('click', () => {
-    const root = document.documentElement;
     const isDark = root.getAttribute('data-theme') === 'dark';
     if (isDark) { root.removeAttribute('data-theme'); themeBtn.setAttribute('aria-pressed', 'false'); }
     else { root.setAttribute('data-theme', 'dark'); themeBtn.setAttribute('aria-pressed', 'true'); }
+    try { localStorage.setItem('theme', isDark ? 'light' : 'dark'); } catch (e) {}
   });
 }
 
