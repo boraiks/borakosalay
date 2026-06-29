@@ -1,6 +1,3 @@
-/* Projeler ve etiketler /data klasöründeki JSON dosyalarından okunuyor.
-   Bunları /admin panelinden düzenliyorsun. Kategoriler sabit (4 tane). */
-
 const categories = ['Software', 'Hardware', 'Concepts', 'Article'];
 
 let projects = [];
@@ -13,7 +10,6 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
 
-/* açık / koyu tema anahtarı (varsayılan: açık) */
 const themeBtn = $('theme');
 if (themeBtn) {
   themeBtn.addEventListener('click', () => {
@@ -53,10 +49,10 @@ function render() {
     html += `<section class="cat-section"><h2 class="cat-head">${esc(cat)}</h2>`
       + group.map(entryHTML).join('') + `</section>`;
   });
-  $('list').innerHTML = html || `<p class="empty">Bu süzgeçle eşleşen proje yok.</p>`;
+  $('list').innerHTML = html || `<p class="empty">No projects match this filter.</p>`;
 
-  $('count').textContent = `${items.length} proje`;
-  $('sort').textContent = sort === 'newest' ? 'tarih ↓' : 'tarih ↑';
+  $('count').textContent = `${items.length} project${items.length === 1 ? '' : 's'}`;
+  $('sort').textContent = sort === 'newest' ? 'date ↓' : 'date ↑';
   $('clear').hidden = activeTags.size === 0;
 }
 
@@ -81,7 +77,7 @@ async function load() {
     tagColors = Object.fromEntries(tagsArr.map(x => [x.name, x.color]));
     render();
   } catch (err) {
-    $('list').innerHTML = `<p class="empty">Veriler yüklenemedi. (Yerelde açtıysan basit bir sunucu gerekiyor; canlı sitede sorunsuz çalışır.)</p>`;
+    $('list').innerHTML = `<p class="empty">Couldn't load data. (If you opened this locally you need a simple server; it works fine on the live site.)</p>`;
   }
 }
 load();

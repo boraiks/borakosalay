@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: boraiks/borakosalay 
+  repo: boraiks/borakosalay
   branch: master
 
 media_folder: "images/uploads"
@@ -8,36 +8,36 @@ public_folder: "/images/uploads"
 
 collections:
   - name: projects
-    label: Projeler
+    label: Projects
     files:
       - name: projects_list
-        label: Tüm projeler
+        label: All projects
         file: data/projects.json
         fields:
-          - label: Projeler
+          - label: Projects
             name: items
-            label_singular: Proje
+            label_singular: Project
             widget: list
             summary: "{{fields.title}}"
             fields:
-              - { label: Başlık, name: title, widget: string }
-              - { label: Tarih, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
-              - { label: Kategori, name: category, widget: select, options: [Software, Hardware, Concepts, Article] }
-              - { label: Etiketler, name: tags, widget: list }
-              - { label: "Bağlantı (opsiyonel)", name: url, widget: string, required: false, default: "#" }
+              - { label: Title, name: title, widget: string }
+              - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
+              - { label: Category, name: category, widget: select, options: [Software, Hardware, Concepts, Article] }
+              - { label: Tags, name: tags, widget: list }
+              - { label: "Link (optional)", name: url, widget: string, required: false, default: "#" }
 
   - name: tags
-    label: Etiketler
+    label: Tags
     files:
       - name: tags_list
-        label: Tüm etiketler
+        label: All tags
         file: data/tags.json
         fields:
-          - label: Etiketler
+          - label: Tags
             name: items
-            label_singular: Etiket
+            label_singular: Tag
             widget: list
             summary: "{{fields.name}}"
             fields:
-              - { label: Ad, name: name, widget: string }
-              - { label: Renk, name: color, widget: color }
+              - { label: Name, name: name, widget: string }
+              - { label: Color, name: color, widget: color }

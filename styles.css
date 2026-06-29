@@ -1,10 +1,8 @@
-/* fabiensanglard tarzı + daktilo (monospace) ana font + açık/koyu tema.
-   Renkleri ve fontu buradan değiştirebilirsin. */
 :root{
-  --bg:#ffffff;       /* zemin (açık tema) */
-  --ink:#1a1a1a;      /* ana metin */
-  --muted:#6a6a6a;    /* filtre/ikincil metin */
-  --rule:#cfcfcf;     /* ince çizgiler */
+  --bg:#ffffff;       /* background (light theme) */
+  --ink:#1a1a1a;      /* main text */
+  --muted:#6a6a6a;    /* filter / secondary text */
+  --rule:#cfcfcf;     /* hairlines */
   --mono:"Courier Prime","Courier New",Courier,monospace;
   color-scheme:light;
 }
@@ -27,7 +25,7 @@ body{
 a{color:inherit; text-decoration:none}
 :focus-visible{outline:2px solid var(--ink); outline-offset:2px}
 
-/* başlık + bağlantılar + tema anahtarı */
+/* header + links + theme toggle */
 .site-head{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.8rem}
 .identity{display:flex; flex-direction:column; gap:.35rem}
 .identity h1{margin:0; font-size:1.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.02em; line-height:1.2}
@@ -46,10 +44,10 @@ a{color:inherit; text-decoration:none}
 }
 :root[data-theme="dark"] .theme-toggle .knob{transform:translateX(20px)}
 
-/* giriş paragrafı */
+/* intro */
 .intro{margin:0 0 2rem; max-width:70ch}
 
-/* filtre çubuğu */
+/* filter bar */
 .controls{margin:0 0 1.5rem}
 .filters{display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.3rem; font-size:.9rem}
 .tagbar{display:flex; flex-wrap:wrap; gap:.4rem}
@@ -58,7 +56,6 @@ a{color:inherit; text-decoration:none}
 .meta button:hover{color:var(--ink)}
 .count{white-space:nowrap}
 
-/* etiket kutucukları (hem filtrede hem listede) */
 .tag,.chip{
   display:inline-flex; align-items:center; gap:.4em;
   padding:.1em .5em; border:1px solid var(--c); border-radius:3px;
@@ -72,11 +69,11 @@ a{color:inherit; text-decoration:none}
 .chip[aria-pressed="true"] .lbl{color:#fff}
 .chip[aria-pressed="true"] .dot{background:#fff}
 
-/* kategori bölümleri (kalın büyük harf başlık + çizgi) */
+
 .cat-section{margin-top:2rem}
 .cat-head{margin:0 0 .5rem; padding-bottom:.35rem; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; border-bottom:1px solid var(--rule)}
 
-/* satırlar */
+/* rows */
 .entry{padding:.22rem 0; line-height:1.75}
 .entry .date{color:var(--ink)}
 .entry .tag{margin:0 .15em}
