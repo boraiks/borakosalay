@@ -1,3 +1,6 @@
+/* Projects and tags are loaded from the JSON files in /data.
+   You edit them from the /admin panel. Categories are fixed (4 of them). */
+
 const categories = ['Software', 'Hardware', 'Concepts', 'Article'];
 
 let projects = [];
@@ -10,6 +13,15 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
 
+/* turn a title into a URL slug (used to link each project to its detail page) */
+const TR = { 'ç': 'c', 'Ç': 'c', 'ğ': 'g', 'Ğ': 'g', 'ı': 'i', 'I': 'i', 'İ': 'i', 'ö': 'o', 'Ö': 'o', 'ş': 's', 'Ş': 's', 'ü': 'u', 'Ü': 'u' };
+const slugify = s => String(s)
+  .replace(/[çÇğĞıIİöÖşŞüÜ]/g, c => TR[c] || c)
+  .toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '');
+
+/* light / dark theme toggle (default: light) */
 const themeBtn = $('theme');
 if (themeBtn) {
   themeBtn.addEventListener('click', () => {
@@ -26,7 +38,7 @@ function tagHTML(t) {
 }
 function entryHTML(p) {
   const tags = (p.tags && p.tags.length) ? p.tags.map(tagHTML).join('') : '';
-  return `<div class="entry"><span class="date">${fmtDate(p.date)}</span> ${tags}<a class="title" href="${esc(p.url || '#')}">${esc(p.title)}</a></div>`;
+  return `<div class="entry"><span class="date">${fmtDate(p.date)}</span> ${tags}<a class="title" href="project.html?p=${encodeURIComponent(slugify(p.title))}">${esc(p.title)}</a></div>`;
 }
 
 function render() {

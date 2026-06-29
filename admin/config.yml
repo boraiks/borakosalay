@@ -34,7 +34,16 @@ collections:
                 multiple: true
                 required: false
                 options_length: 10000
-              - { label: "Link (optional)", name: url, widget: string, required: false, default: "#" }
+              - label: Links
+                name: links
+                widget: list
+                required: false
+                label_singular: Link
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: Label, name: label, widget: string, hint: "e.g. Source, Demo, Paper" }
+                  - { label: URL, name: url, widget: string }
+              - { label: Body, name: body, widget: markdown, required: false, hint: "Description, images, code, embedded video" }
 
   - name: tags
     label: Tags
