@@ -8,6 +8,16 @@
         "embedded"
       ],
       "url": "#"
+    },
+    {
+      "title": "AI Lawyer (RAG)",
+      "date": "2026-06-29",
+      "category": "Software",
+      "tags": [
+        "datascience",
+        "backend"
+      ],
+      "url": "#"
     }
   ]
 }
