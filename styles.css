@@ -1,9 +1,14 @@
+/* Homepage = serif (classic, document-like). Detail/article pages = monospace,
+   Fabien-style technical document. Change fonts/colors in :root below. */
 :root{
-  --bg:#ffffff;     
-  --ink:#1a1a1a;      
-  --muted:#6a6a6a;    
-  --rule:#cfcfcf;   
-  --mono:"Courier Prime","Courier New",Courier,monospace;
+  --bg:#ffffff;       /* background (light theme) */
+  --ink:#1a1a1a;      /* main text */
+  --muted:#6a6a6a;    /* filter / secondary text */
+  --rule:#cfcfcf;     /* hairlines */
+  --ok:#2e7d32;       /* "good" value color (e.g. green numbers) */
+  --bad:#c62828;      /* "bad" value color (e.g. red numbers) */
+  --serif:"EB Garamond",Georgia,"Times New Roman",serif;  /* homepage font — swap here */
+  --mono:"Courier Prime","Courier New",Courier,monospace; /* article/code font */
   color-scheme:light;
 }
 :root[data-theme="dark"]{
@@ -11,16 +16,22 @@
   --ink:#e6e6e6;
   --muted:#9a9a9a;
   --rule:#3a3a3a;
+  --ok:#7bc47f;
+  --bad:#e57373;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+html{scrollbar-gutter:stable both-edges}   /* keeps the column perfectly centered, scrollbar or not */
 html,body{margin:0}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:var(--mono); font-size:16px; line-height:1.55;
+  font-family:var(--serif); font-size:19px; line-height:1.6;
   transition:background-color .2s ease, color .2s ease;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
+/* article/detail pages opt into the monospace "Fabien" look via <body class="doc"> */
+body.doc{font-family:var(--mono); font-size:16px; line-height:1.65}
+
 .paper{max-width:880px; margin:0 auto; padding:2.5rem 1.5rem 5rem}
 a{color:inherit; text-decoration:none}
 :focus-visible{outline:2px solid var(--ink); outline-offset:2px}
@@ -28,8 +39,8 @@ a{color:inherit; text-decoration:none}
 /* header + links + theme toggle */
 .site-head{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; margin-bottom:1.8rem}
 .identity{display:flex; flex-direction:column; gap:.35rem}
-.identity h1{margin:0; font-size:1.55rem; font-weight:700; text-transform:uppercase; letter-spacing:.02em; line-height:1.2}
-.links{display:flex; flex-wrap:wrap; gap:.9rem; font-size:.9rem}
+.identity h1{margin:0; font-size:1.7rem; font-weight:700; letter-spacing:.01em; line-height:1.2}
+.links{display:flex; flex-wrap:wrap; gap:.9rem; font-size:.85rem}
 .links a:hover{text-decoration:underline; text-underline-offset:2px}
 
 .theme-toggle{
@@ -45,11 +56,11 @@ a{color:inherit; text-decoration:none}
 :root[data-theme="dark"] .theme-toggle .knob{transform:translateX(20px)}
 
 /* intro */
-.intro{margin:0 0 2rem; max-width:70ch}
+.intro{margin:0 0 2rem; max-width:66ch}
 
 /* filter bar */
 .controls{margin:0 0 1.5rem}
-.filters{display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.3rem; font-size:.9rem}
+.filters{display:flex; flex-wrap:wrap; align-items:center; gap:.6rem 1.3rem; font-size:.85rem}
 .tagbar{display:flex; flex-wrap:wrap; gap:.4rem}
 .meta{display:flex; align-items:center; gap:1.2rem; margin-left:auto; color:var(--muted)}
 .meta button{background:none; border:0; padding:0; font:inherit; color:var(--muted); cursor:pointer}
@@ -59,9 +70,9 @@ a{color:inherit; text-decoration:none}
 /* tag chips (both in the filter and in the list) */
 .tag,.chip{
   display:inline-flex; align-items:center; gap:.4em;
-  padding:.1em .5em; border:1px solid var(--c); border-radius:3px;
+  padding:.05em .5em; border:1px solid var(--c); border-radius:3px;
   background:color-mix(in srgb, var(--c) 12%, transparent);
-  font-size:.8em; line-height:1.4; white-space:nowrap; vertical-align:middle;
+  font-size:.72em; line-height:1.5; white-space:nowrap; vertical-align:middle;
 }
 .tag .dot,.chip .dot{width:.5em; height:.5em; border-radius:50%; background:var(--c); flex-shrink:0}
 .tag .lbl,.chip .lbl{color:var(--c)}
@@ -70,13 +81,13 @@ a{color:inherit; text-decoration:none}
 .chip[aria-pressed="true"] .lbl{color:#fff}
 .chip[aria-pressed="true"] .dot{background:#fff}
 
-/* category sections (bold uppercase heading + rule) */
+/* category sections (bold heading + rule) */
 .cat-section{margin-top:2rem}
-.cat-head{margin:0 0 .5rem; padding-bottom:.35rem; font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; border-bottom:1px solid var(--rule)}
+.cat-head{margin:0 0 .5rem; padding-bottom:.35rem; font-size:1.1rem; font-weight:700; text-transform:uppercase; letter-spacing:.04em; border-bottom:1px solid var(--rule)}
 
-/* rows */
-.entry{padding:.22rem 0; line-height:1.75}
-.entry .date{color:var(--ink)}
+/* rows — dates stay monospace so they line up */
+.entry{padding:.18rem 0; line-height:1.7}
+.entry .date{color:var(--ink); font-family:var(--mono); font-size:.82em}
 .entry .tag{margin:0 .15em}
 .entry .title{font-weight:700; margin-left:.15em}
 .entry .title:hover{text-decoration:underline; text-underline-offset:2px}
@@ -85,20 +96,22 @@ a{color:inherit; text-decoration:none}
 
 @media (prefers-reduced-motion: reduce){*{transition:none !important}}
 
-/* ---------- project detail page ---------- */
+/* ===================== project / article detail page ===================== */
 .back{font-size:.9rem; color:var(--muted)}
 .back:hover{color:var(--ink); text-decoration:underline; text-underline-offset:2px}
 
-.project{max-width:74ch}
+/* fill the same width as the header so the whole column is centered (fixes off-center look) */
+.project{max-width:100%}
 .project-title{margin:.4rem 0 .6rem; font-size:1.5rem; font-weight:700; line-height:1.25}
 .project-meta{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; color:var(--muted); font-size:.9rem; padding-bottom:.7rem; border-bottom:1px solid var(--rule); margin-bottom:1.6rem}
 .project-meta .cat{margin-left:auto; text-transform:uppercase; letter-spacing:.03em}
 
 /* rendered Markdown body */
-.project-body{line-height:1.75}
+.project-body{line-height:1.7}
 .project-body > *:first-child{margin-top:0}
 .project-body p{margin:0 0 1.1rem}
-.project-body h2{margin:2rem 0 .7rem; font-size:1.15rem; font-weight:700; line-height:1.3}
+/* section headers, Fabien-style: bold uppercase with a full-width rule underneath */
+.project-body h2{margin:2.2rem 0 .9rem; padding-bottom:.3rem; border-bottom:1px solid var(--rule); font-size:1.05rem; font-weight:700; text-transform:uppercase; letter-spacing:.03em; line-height:1.3}
 .project-body h3{margin:1.6rem 0 .6rem; font-size:1rem; font-weight:700}
 .project-body a{text-decoration:underline; text-underline-offset:2px}
 .project-body ul,.project-body ol{margin:0 0 1.1rem; padding-left:1.4rem}
@@ -108,11 +121,16 @@ a{color:inherit; text-decoration:none}
 .project-body blockquote{margin:1.1rem 0; padding:.2rem 0 .2rem 1rem; border-left:3px solid var(--rule); color:var(--muted)}
 .project-body hr{border:0; border-top:1px solid var(--rule); margin:2rem 0}
 
-/* inline code + code blocks (plain monospace, boxed — no syntax colors) */
+/* tables, Fabien-style: gray header row, bordered cells */
+.project-body table{width:100%; border-collapse:collapse; margin:1.4rem 0; font-size:.95em}
+.project-body th,.project-body td{border:1px solid var(--rule); padding:.45rem .7rem; text-align:left}
+.project-body th{background:color-mix(in srgb, var(--ink) 9%, transparent); font-weight:700}
+
+/* inline code = flat gray chip; code blocks = bordered box */
 .project-body code{
-  font-family:var(--mono); font-size:.9em;
-  padding:.12em .35em; border:1px solid var(--rule); border-radius:3px;
-  background:color-mix(in srgb, var(--ink) 6%, transparent);
+  font-family:var(--mono); font-size:.92em;
+  padding:.1em .4em; border-radius:2px;
+  background:color-mix(in srgb, var(--ink) 10%, transparent);
 }
 .project-body pre{
   margin:1.3rem 0; padding:.9rem 1rem; overflow-x:auto;
@@ -120,9 +138,17 @@ a{color:inherit; text-decoration:none}
   background:color-mix(in srgb, var(--ink) 5%, transparent);
   line-height:1.5;
 }
-.project-body pre code{border:0; padding:0; background:none; font-size:.85rem}
+.project-body pre code{padding:0; background:none; font-size:.85rem}
+
+/* helper classes for colored values inside a body, e.g. <span class="ok">48 fps</span> */
+.project-body .ok{color:var(--ok); font-weight:700}
+.project-body .bad{color:var(--bad); font-weight:700}
 
 /* links section at the bottom of a project */
 .project-links{display:flex; flex-wrap:wrap; gap:1.2rem; margin-top:2rem; padding-top:1rem; border-top:1px solid var(--rule); font-size:.95rem}
 .project-links a{text-decoration:underline; text-underline-offset:2px}
 .project-links a:hover{color:var(--muted)}
+
+/* ---------- header logo ---------- */
+.brand{display:flex; align-items:center; gap:.9rem}
+.brand-logo{height:40px; width:auto; display:block; flex-shrink:0}
