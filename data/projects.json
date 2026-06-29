@@ -1,22 +1,19 @@
 {
   "items": [
     {
-      "title": "STM32 ile sıcaklık günlükçüsü",
-      "date": "2023-12-01",
-      "category": "Hardware",
+      "title": "RF Signals",
+      "date": "2026-06-29",
+      "category": "Article",
       "tags": [
         "embedded"
       ],
-      "url": "#"
-    },
-    {
-      "title": "AI Lawyer (RAG)",
-      "date": "2026-06-29",
-      "category": "Software",
-      "tags": [
-        "datascience",
-        "backend"
+      "links": [
+        {
+          "label": "test",
+          "url": "https://borakosalay.me"
+        }
       ],
+      "body": "**Lorem ipsum** dolor sit amet, consectetur adipiscing elit. Integer tempus, neque ut tincidunt posuere, quam est auctor risus, eu mollis quam enim nec neque. Maecenas a eleifend ligula, eget commodo ante. Curabitur sapien urna, tempor sed consequat a, accumsan nec odio. Nullam semper libero diam, vel euismod quam ultrices a. Mauris vulputate ultrices velit, vel feugiat leo scelerisque eget. Donec eget justo id neque pretium placerat at eu ligula. Vestibulum euismod turpis et magna ultrices ullamcorper. Nam auctor pellentesque augue, vel bibendum mi ullamcorper a.\n\n![lorem ipsum](/images/uploads/images.jpg \"lorem ipsum\")\n\nSed faucibus faucibus odio non suscipit. Mauris ligula est, porttitor et congue ut, condimentum sit amet sapien. In magna nunc, iaculis vehicula vehicula in, hendrerit ut nulla. Donec tincidunt, ex ac commodo accumsan, nulla nunc interdum leo, vel tincidunt erat quam tempus nibh. Duis vitae turpis ante. Maecenas leo ipsum, vulputate ut consectetur nec, porttitor ut sem. Fusce facilisis quam ut nisi vulputate pulvinar. Cras condimentum consequat nulla quis facilisis.\n\n```plain\n<title>test</title>\n```",
       "url": "#"
     }
   ]
