@@ -1,0 +1,43 @@
+backend:
+  name: github
+  repo: KULLANICI_ADIN/borakosalay   # <-- buradaki KULLANICI_ADIN'ı kendi GitHub kullanıcı adınla değiştir
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: projects
+    label: Projeler
+    files:
+      - name: projects_list
+        label: Tüm projeler
+        file: data/projects.json
+        fields:
+          - label: Projeler
+            name: items
+            label_singular: Proje
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Başlık, name: title, widget: string }
+              - { label: Tarih, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
+              - { label: Kategori, name: category, widget: select, options: [Software, Hardware, Concepts, Article] }
+              - { label: Etiketler, name: tags, widget: list }
+              - { label: "Bağlantı (opsiyonel)", name: url, widget: string, required: false, default: "#" }
+
+  - name: tags
+    label: Etiketler
+    files:
+      - name: tags_list
+        label: Tüm etiketler
+        file: data/tags.json
+        fields:
+          - label: Etiketler
+            name: items
+            label_singular: Etiket
+            widget: list
+            summary: "{{fields.name}}"
+            fields:
+              - { label: Ad, name: name, widget: string }
+              - { label: Renk, name: color, widget: color }

@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "date": "2025-03-01", "category": "Article",  "tags": ["essay"],                  "title": "Neden statik siteler?",                 "url": "#" },
+    { "date": "2025-02-14", "category": "Concepts", "tags": ["math"],                   "title": "Fourier dönüşümünü görselleştirmek",    "url": "#" },
+    { "date": "2025-01-09", "category": "Software", "tags": ["frontend"],               "title": "Gerçek zamanlı analiz panosu",          "url": "#" },
+    { "date": "2024-11-02", "category": "Software", "tags": ["datascience", "backend"], "title": "Film öneri motoru",                     "url": "#" },
+    { "date": "2024-09-12", "category": "Article",  "tags": ["essay"],                  "title": "Öğrenmeyi belgelemek üzerine",          "url": "#" },
+    { "date": "2024-07-18", "category": "Software", "tags": ["backend"],                "title": "Dağıtık görev kuyruğu",                 "url": "#" },
+    { "date": "2024-05-30", "category": "Concepts", "tags": ["algorithms"],             "title": "A* yol bulmayı derinlemesine",          "url": "#" },
+    { "date": "2024-03-22", "category": "Hardware", "tags": ["fpga"],                   "title": "FPGA üzerinde kenar algılama",          "url": "#" },
+    { "date": "2023-12-01", "category": "Hardware", "tags": ["embedded"],               "title": "STM32 ile sıcaklık günlükçüsü",         "url": "#" }
+  ]
+}
