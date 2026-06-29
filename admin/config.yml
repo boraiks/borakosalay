@@ -6,6 +6,12 @@ backend:
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
+# clean up uploaded filenames (no spaces/odd characters) so asset URLs always work
+media_libraries:
+  default:
+    config:
+      slugify_filename: true
+
 collections:
   - name: projects
     label: Projects
@@ -18,6 +24,7 @@ collections:
             name: items
             label_singular: Project
             widget: list
+            collapsed: true
             summary: "{{fields.title}}"
             fields:
               - { label: Title, name: title, widget: string }
@@ -57,6 +64,7 @@ collections:
             name: items
             label_singular: Tag
             widget: list
+            collapsed: true
             summary: "{{fields.name}}"
             fields:
               - { label: Name, name: name, widget: string }
