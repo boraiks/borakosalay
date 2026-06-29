@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bora Koşalay</title>
+<title>borakosalay.me</title>
 <link rel="stylesheet" href="styles.css">
 <script>
   /* apply the saved theme before paint so there's no light/dark flash (theme-init) */
@@ -28,11 +28,14 @@
       <button class="theme-toggle" id="theme" type="button" aria-label="Toggle theme" aria-pressed="false"><span class="knob"></span></button>
     </header>
 
-    <p class="intro">Projects, experiments, and short notes.</p>
+    <p class="intro">Projects, experiments and everything else.</p>
 
     <div class="controls">
       <div class="filters">
-        <div class="tagbar" id="tagbar" aria-label="Tag filter"></div>
+        <div class="filter-group">
+          <span class="filters-label">filters:</span>
+          <div class="tagbar" id="tagbar" aria-label="Tag filter"></div>
+        </div>
         <div class="meta">
           <button id="sort" type="button" aria-label="Change sorting"></button>
           <button id="clear" type="button" hidden>clear</button>

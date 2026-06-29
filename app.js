@@ -4,6 +4,7 @@ let projects = [];
 let tagColors = {};
 let tagOrder = [];
 let activeTags = new Set();
+let collapsedCats = new Set();
 let sort = 'newest';
 
 const $ = id => document.getElementById(id);
@@ -58,8 +59,12 @@ function render() {
   categories.forEach(cat => {
     const group = items.filter(p => p.category === cat);
     if (!group.length) return;
-    html += `<section class="cat-section"><h2 class="cat-head">${esc(cat)}</h2>`
-      + group.map(entryHTML).join('') + `</section>`;
+    const collapsed = collapsedCats.has(cat);
+    html += `<section class="cat-section${collapsed ? ' collapsed' : ''}" data-cat="${esc(cat)}">`
+      + `<button class="cat-head" type="button" aria-expanded="${!collapsed}">`
+      + `<span class="cat-arrow" aria-hidden="true">↓</span><span>${esc(cat)}</span></button>`
+      + `<div class="cat-body">` + group.map(entryHTML).join('') + `</div>`
+      + `</section>`;
   });
   $('list').innerHTML = html || `<p class="empty">No projects match this filter.</p>`;
 
@@ -76,6 +81,17 @@ $('tagbar').addEventListener('click', e => {
 });
 $('sort').addEventListener('click', () => { sort = sort === 'newest' ? 'oldest' : 'newest'; render(); });
 $('clear').addEventListener('click', () => { activeTags.clear(); render(); });
+
+// click a category heading to collapse/expand its projects (state is remembered)
+$('list').addEventListener('click', e => {
+  const head = e.target.closest('.cat-head'); if (!head) return;
+  const section = head.closest('.cat-section');
+  const cat = section.dataset.cat;
+  const collapse = !section.classList.contains('collapsed');
+  section.classList.toggle('collapsed', collapse);
+  head.setAttribute('aria-expanded', String(!collapse));
+  if (collapse) collapsedCats.add(cat); else collapsedCats.delete(cat);
+});
 
 async function load() {
   try {

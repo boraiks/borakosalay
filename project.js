@@ -1,6 +1,3 @@
-/* Detail page: reads ?p=<slug> from the URL, finds the matching project
-   in data/projects.json, and renders its title, date, tags, Markdown body and links. */
-
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
