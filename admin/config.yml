@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: repo: boraiks/borakosalay 
+  repo: boraiks/borakosalay 
   branch: main
 
 media_folder: "images/uploads"
