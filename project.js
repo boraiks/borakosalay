@@ -1,3 +1,6 @@
+/* Detail page: reads ?p=<slug> from the URL, finds the matching project
+   in data/projects.json, and renders its title, date, tags, Markdown body and links. */
+
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtDate = iso => { const [y, m, d] = String(iso).split('-'); return `${d}/${m}/${y}`; };
@@ -73,6 +76,15 @@ async function load() {
       + `<div class="project-meta"><span class="date">${fmtDate(p.date)}</span> ${tags}<span class="cat">${esc(p.category)}</span></div>`
       + bodyHTML
       + linksHTML;
+
+    // if the body embeds a 3D model, load Google's <model-viewer> on demand
+    if (document.querySelector('model-viewer') && !window.__modelViewerLoaded) {
+      window.__modelViewerLoaded = true;
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer/dist/model-viewer.min.js';
+      document.head.appendChild(s);
+    }
 
   } catch (err) {
     $('project').innerHTML = `<p class="empty">Couldn't load this project. <a href="index.html">Back to home</a>.</p>`;
