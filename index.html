@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeler — Adın Soyadın</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="paper">
+
+    <header class="site-head">
+      <!-- Adını ve tanıtım satırını kendine göre değiştir -->
+      <h1>Adın Soyadın</h1>
+      <p class="intro">Boş zamanlarımda ürettiğim projeler, denemeler ve kısa yazılar.</p>
+      <nav class="links" aria-label="Bağlantılar">
+        <a href="#">github</a>
+        <a href="#">e-posta</a>
+        <a href="#">rss</a>
+      </nav>
+    </header>
+
+    <div class="controls">
+      <nav class="cats" id="cats" aria-label="Kategoriler"></nav>
+      <div class="filters">
+        <div class="tagbar" id="tagbar" aria-label="Etiket filtresi"></div>
+        <div class="meta">
+          <button id="sort" type="button" aria-label="Sıralamayı değiştir"></button>
+          <span class="count" id="count"></span>
+          <button id="clear" type="button" hidden>× temizle</button>
+        </div>
+      </div>
+    </div>
+
+    <main id="list"></main>
+
+    <footer class="foot">bu sayfa elle yazıldı · 2026</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

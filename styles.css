@@ -1,0 +1,70 @@
+/* ---- Renk paleti: her şeyi buradan değiştirebilirsin ---- */
+:root{
+  --paper:#f6efdd;   /* zemin (kâğıt) */
+  --ink:#2b2620;     /* ana metin */
+  --muted:#8a7f6c;   /* tarih, ikincil metin */
+  --rule:#e3d8bd;    /* ince çizgiler */
+  --hover:#efe5cd;   /* satır üzerine gelince */
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--serif); font-size:17px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.paper{max-width:760px; margin:0 auto; padding:3rem 1.25rem 5rem}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink); outline-offset:3px; border-radius:3px}
+
+/* ---- Başlık ---- */
+.site-head h1{font-size:1.9rem; font-weight:600; margin:0 0 .35rem; letter-spacing:-.01em}
+.intro{margin:0 0 .8rem; color:var(--ink); max-width:46ch}
+.links{font-family:var(--mono); font-size:.8rem; color:var(--muted); display:flex; flex-wrap:wrap; gap:.2rem .9rem}
+.links a{text-decoration:none}
+.links a:hover{color:var(--ink); text-decoration:underline; text-underline-offset:2px}
+
+/* ---- Üst kontrol çubuğu ---- */
+.controls{margin-top:2.25rem; padding:.9rem 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule)}
+.cats{display:flex; flex-wrap:wrap; gap:.15rem 1.1rem; margin-bottom:.85rem; font-family:var(--mono); font-size:.85rem}
+.cats button{background:none; border:0; border-bottom:2px solid transparent; padding:.1rem 0; margin:0; color:var(--muted); cursor:pointer; font:inherit}
+.cats button:hover{color:var(--ink)}
+.cats button.active{color:var(--ink); border-bottom-color:var(--ink)}
+
+.filters{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.7rem 1.25rem}
+.tagbar{display:flex; flex-wrap:wrap; gap:.45rem}
+.chip{display:inline-flex; align-items:center; gap:.45em; font-family:var(--mono); font-size:.78rem; line-height:1; padding:.28rem .6rem; border:1px solid var(--rule); border-radius:999px; background:none; color:var(--ink); cursor:pointer}
+.chip .dot{width:.5em; height:.5em; border-radius:50%; background:var(--c)}
+.chip .lbl{color:var(--c)}
+.chip:hover{border-color:var(--c)}
+.chip[aria-pressed="true"]{background:var(--c); border-color:var(--c)}
+.chip[aria-pressed="true"] .lbl{color:var(--paper)}
+.chip[aria-pressed="true"] .dot{background:var(--paper)}
+
+.meta{display:flex; align-items:center; gap:1.1rem; font-family:var(--mono); font-size:.8rem; color:var(--muted)}
+.meta button{background:none; border:0; font:inherit; color:var(--muted); cursor:pointer; padding:0}
+.meta button:hover{color:var(--ink)}
+.count{white-space:nowrap}
+
+/* ---- Liste ---- */
+.cat-section{margin-top:2.4rem}
+.cat-head{font-family:var(--mono); font-size:.74rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:400; margin:0 0 .35rem; padding-bottom:.4rem; border-bottom:1px solid var(--rule)}
+.entry{display:flex; flex-wrap:wrap; align-items:baseline; gap:.25rem .9rem; padding:.5rem .55rem; margin:0 -.55rem; border-radius:6px; text-decoration:none; transition:background .12s ease}
+.entry:hover{background:var(--hover)}
+.entry:hover .entry-title{text-decoration:underline; text-underline-offset:2px}
+.date{flex:none; width:11ch; font-family:var(--mono); font-size:.8rem; color:var(--muted); font-variant-numeric:tabular-nums}
+.tags{flex:none; display:inline-flex; flex-wrap:wrap; gap:.55rem}
+.tag{display:inline-flex; align-items:center; gap:.4em; font-family:var(--mono); font-size:.76rem; white-space:nowrap}
+.tag .dot{width:.5em; height:.5em; border-radius:50%; background:var(--c)}
+.tag .lbl{color:var(--c)}
+.entry-title{flex:1 1 15rem; min-width:0; font-size:1.1rem; color:var(--ink)}
+
+.empty{color:var(--muted); padding:2.5rem .55rem; font-size:1.02rem}
+
+/* ---- Alt not ---- */
+.foot{margin-top:4rem; padding-top:1rem; border-top:1px solid var(--rule); font-family:var(--mono); font-size:.74rem; color:var(--muted)}
+
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
