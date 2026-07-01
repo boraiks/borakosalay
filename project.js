@@ -76,7 +76,7 @@ async function load() {
       return;
     }
 
-    document.title = `${p.title} — Your Name`;
+    document.title = `${p.title} `;
 
     const tags = (p.tags && p.tags.length) ? p.tags.map(t => tagHTML(t, tagColors)).join('') : '';
 
