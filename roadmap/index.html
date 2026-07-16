@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA / Test Engineer Roadmap</title>
+<link rel="stylesheet" href="/styles.css">
+<script>
+  try { if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+</script>
+<style>
+
+  .rm-sub{margin:.4rem 0 1.8rem; color:var(--muted)}
+
+  .rm-progress{margin:0 0 1.4rem}
+  .rm-progress-meta{display:flex; justify-content:space-between; font-size:.85rem; color:var(--muted); margin-bottom:.45rem}
+  .rm-progress-meta b{color:var(--ink)}
+  .rm-track{height:8px; border:1px solid var(--rule); border-radius:3px; overflow:hidden; background:color-mix(in srgb, var(--ink) 4%, transparent)}
+  .rm-fill{height:100%; width:0%; background:var(--ok); transition:width .3s ease}
+
+  .rm-time{font-size:.78rem; font-weight:400; text-transform:none; letter-spacing:0; color:var(--muted); margin-left:.6rem}
+  .rm-count{margin-left:auto; font-size:.85rem; font-weight:400; letter-spacing:0; color:var(--muted); white-space:nowrap}
+  .rm-desc{margin:.15rem 0 .55rem; font-size:.9rem; color:var(--muted)}
+
+  ul.rm-items{list-style:none; margin:0 0 .4rem; padding:0}
+  .rm-item{
+    display:flex; align-items:flex-start; gap:.7rem; width:100%;
+    background:none; border:0; border-bottom:1px solid color-mix(in srgb, var(--rule) 55%, transparent);
+    font:inherit; color:var(--ink); text-align:left; cursor:pointer;
+    padding:.42rem .3rem; line-height:1.55;
+  }
+  .rm-item:hover{background:color-mix(in srgb, var(--ink) 5%, transparent)}
+  .rm-box{
+    flex:0 0 auto; width:1.05em; height:1.05em; margin-top:.24em;
+    border:1.5px solid var(--muted); border-radius:3px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:.8em; line-height:1; color:transparent;
+  }
+  .rm-label .tag{margin-left:.5em}
+  .rm-item.done{color:var(--muted)}
+  .rm-item.done .rm-label{text-decoration:line-through; text-decoration-thickness:1px}
+  .rm-item.done .rm-box{background:var(--muted); border-color:var(--muted); color:var(--bg)}
+  .rm-item.done .tag{filter:grayscale(1); opacity:.55}
+
+  .rm-foot{
+    margin-top:2.6rem; padding-top:1rem; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+    font-size:.85rem; color:var(--muted);
+  }
+  .rm-foot button{background:none; border:1px solid var(--rule); border-radius:3px; padding:.15rem .6rem; font:inherit; color:var(--muted); cursor:pointer}
+  .rm-foot button:hover{color:var(--ink); border-color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="paper">
+
+    <header class="site-head">
+      <a class="back" href="/">&larr; back</a>
+      <button class="theme-toggle" id="theme" type="button" aria-label="Toggle theme" aria-pressed="false"><span class="knob"></span></button>
+    </header>
+
+    <h1 class="project-title">QA / Test Engineer Roadmap</h1>
+    <p class="rm-sub">Temellerden uzmanlığa — tamamladıkça işaretle.</p>
+
+    <div class="rm-progress">
+      <div class="rm-progress-meta">
+        <span>progress</span>
+        <span><b id="rm-done">0</b><span id="rm-total">/0</span> &middot; <b id="rm-pct">0%</b></span>
+      </div>
+      <div class="rm-track" id="rm-bar" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="rm-fill" id="rm-fill"></div>
+      </div>
+    </div>
+
+    <main id="rm-list"></main>
+
+    <footer class="rm-foot">
+      <span>progress is saved in this browser</span>
+      <button id="rm-reset" type="button">reset</button>
+    </footer>
+
+  </div>
+
+<script>
+
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const themeBtn = $('theme');
+if (themeBtn) {
+  const root = document.documentElement;
+  themeBtn.setAttribute('aria-pressed', root.getAttribute('data-theme') === 'dark' ? 'true' : 'false');
+  themeBtn.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    if (isDark) { root.removeAttribute('data-theme'); themeBtn.setAttribute('aria-pressed', 'false'); }
+    else { root.setAttribute('data-theme', 'dark'); themeBtn.setAttribute('aria-pressed', 'true'); }
+    try { localStorage.setItem('theme', isDark ? 'light' : 'dark'); } catch (e) {}
+  });
+}
+
+const TAG_COLORS = { sertifika: '#31ca55', proje: '#c2792a', opsiyonel: '#2f6fb0' };
+
+const STAGES = [
+  {
+    id: 's0', title: '0 — Temeller', time: 'büyük kısmı hazır',
+    desc: 'Teste başlamadan önce gereken zemin.',
+    items: [
+      { id: 's0-python', text: 'Python (değişkenler, fonksiyonlar, OOP, hata yönetimi)' },
+      { id: 's0-git', text: 'Git ve GitHub akışı: fork, branch, commit, pull request' },
+      { id: 's0-sql', text: 'SQL temelleri: SELECT, JOIN, WHERE — test verisi doğrulamak için' },
+      { id: 's0-http', text: "HTTP temelleri: istek/yanıt, metodlar, header'lar" },
+      { id: 's0-css', text: 'HTML/CSS seçiciler: id, class, attribute, XPath mantığı' },
+      { id: 's0-linux', text: 'Linux terminal temelleri: dosya gezinme, log okuma, grep' }
+    ]
+  },
+  {
+    id: 's1', title: '1 — Test temelleri', time: '1-2 ay',
+    desc: 'Otomasyondan önce test düşüncesi. Mülakatlarda en çok sorulan katman.',
+    items: [
+      { id: 's1-sdlc', text: 'SDLC ve STLC: yazılım ve test yaşam döngüleri' },
+      { id: 's1-levels', text: 'Test seviyeleri: unit, integration, system, acceptance' },
+      { id: 's1-types', text: 'Test türleri: smoke, sanity, regression, functional vs non-functional' },
+      { id: 's1-explore', text: 'Exploratory testing: charter yazma, seans bazlı test' },
+      { id: 's1-design', text: 'Test tasarım teknikleri: equivalence partitioning, boundary value' },
+      { id: 's1-design2', text: 'Test tasarım teknikleri: decision table, state transition' },
+      { id: 's1-buglife', text: 'Bug yaşam döngüsü: new → assigned → fixed → verified → closed' },
+      { id: 's1-sevpri', text: 'Severity vs priority farkı' },
+      { id: 's1-jira', text: 'Jira: issue açma, board mantığı, workflow' },
+      { id: 's1-agile', text: 'Agile/Scrum temelleri: sprint, standup, refinement, DoD' },
+      { id: 's1-proj', text: 'saucedemo-qa reposuna EP/BVA test tasarım tablosu ekle', tag: 'proje' },
+      { id: 's1-ctfl', text: 'ISTQB CTFL — Foundation Level sınavı (TTB üzerinden)', tag: 'sertifika' }
+    ]
+  },
+  {
+    id: 's2', title: '2 — UI otomasyonu', time: '2-4 ay',
+    desc: 'Tek araçta derinleş, diğerini tanı.',
+    items: [
+      { id: 's2-pw', text: "Playwright (Python): locator'lar, auto-wait, trace viewer" },
+      { id: 's2-pytest', text: 'pytest derinleşme: fixture, parametrize, marker, conftest' },
+      { id: 's2-locator', text: 'Locator stratejileri ve bekleme (wait) mantığı' },
+      { id: 's2-pom', text: 'Page Object Model ile test mimarisi' },
+      { id: 's2-flaky', text: 'Flaky test nedenleri ve yönetimi' },
+      { id: 's2-selenium', text: 'Selenium: temel düzeyde tanışıklık (ilanlar için)', tag: 'opsiyonel' },
+      { id: 's2-pyramid', text: "Test otomasyon piramidi ve anti-pattern'ler" },
+      { id: 's2-proj', text: "playwright-pytest-demo'yu POM yapısına geçir", tag: 'proje' },
+      { id: 's2-proj2', text: 'the-internet / automationexercise üzerinde senaryo çeşitliliği', tag: 'proje' }
+    ]
+  },
+  {
+    id: 's3', title: '3 — API testi', time: '1-2 ay',
+    desc: 'Piramidin geniş katmanı: hızlı, kararlı, erken geri bildirim.',
+    items: [
+      { id: 's3-rest', text: 'REST, JSON, status kodları, auth temelleri' },
+      { id: 's3-postman', text: 'Postman: koleksiyon, environment, temel testler' },
+      { id: 's3-requests', text: 'requests + pytest ile kodla API testi' },
+      { id: 's3-pwapi', text: 'Playwright API request context' },
+      { id: 's3-schema', text: 'Şema doğrulama (jsonschema / pydantic)' },
+      { id: 's3-mock', text: 'Mocking ve stub kavramları' },
+      { id: 's3-proj', text: 'restful-booker için uçtan uca API test suite reposu', tag: 'proje' }
+    ]
+  },
+  {
+    id: 's4', title: '4 — CI/CD ve raporlama', time: '1-2 ay',
+    desc: "Testin değeri her push'ta otomatik koşmasında.",
+    items: [
+      { id: 's4-actions', text: 'GitHub Actions ile test pipeline kurma' },
+      { id: 's4-report', text: 'Allure veya pytest-html ile raporlama' },
+      { id: 's4-docker', text: 'Docker temelleri: image, container, testte kullanımı' },
+      { id: 's4-parallel', text: 'Paralel test koşturma (pytest-xdist)' },
+      { id: 's4-data', text: 'Ortam ve test verisi yönetimi' },
+      { id: 's4-proj', text: 'Mevcut repolara CI rozeti + Allure raporu ekle', tag: 'proje' },
+      { id: 's4-oss', text: "İlk açık kaynak test PR'ı (pytest / Playwright / Robot Framework)", tag: 'proje' }
+    ]
+  },
+  {
+    id: 's5', title: '5 — Uzmanlaşma', time: '6. aydan itibaren',
+    desc: 'Hepsini değil, birini seç. Doğal yolların: performans ve AI testi.',
+    items: [
+      { id: 's5-perf', text: "Performans testi: Locust ile yük senaryoları (k6/JMeter'ı tanı)" },
+      { id: 's5-sec', text: 'Güvenlik temelleri: OWASP Top 10' },
+      { id: 's5-bdd', text: 'BDD: Gherkin sözdizimi, behave' },
+      { id: 's5-mobile', text: 'Mobil test: Appium', tag: 'opsiyonel' },
+      { id: 's5-aitest', text: 'AI sistemlerini test etme: LLM çıktı değerlendirme (eval)' },
+      { id: 's5-llmgen', text: 'LLM ile test üretimi ve gözden geçirme pratiği' },
+      { id: 's5-arch', text: 'Framework mimarisi tasarımı: katmanlar, raporlama, ölçekleme' },
+      { id: 's5-proj', text: "Locust ile bir API'ye yük testi reposu", tag: 'proje' },
+      { id: 's5-proj2', text: "mail-agent veya ask-law-RAG'e LLM eval testleri yaz", tag: 'proje' },
+      { id: 's5-tae', text: 'ISTQB CTAL-TAE — Test Automation Engineer (1-3 yıl deneyim sonrası)', tag: 'sertifika' },
+      { id: 's5-genai', text: 'ISTQB CT-GenAI, ardından CT-AI (AI test yolu)', tag: 'sertifika' }
+    ]
+  }
+];
+
+const STORE_KEY = 'qa-roadmap-v1';
+let state = {};
+try {
+  const raw = localStorage.getItem(STORE_KEY);
+  const parsed = raw ? JSON.parse(raw) : null;
+  if (parsed && typeof parsed === 'object') state = parsed;
+} catch (e) { state = {}; }
+const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} };
+
+const collapsedStages = new Set();
+const TOTAL = STAGES.reduce((n, s) => n + s.items.length, 0);
+
+function tagHTML(t) {
+  const c = TAG_COLORS[t] || '#777777';
+  return `<span class="tag" style="--c:${c}"><span class="dot"></span><span class="lbl">${esc(t)}</span></span>`;
+}
+function itemHTML(it) {
+  const done = !!state[it.id];
+  return `<li><button class="rm-item${done ? ' done' : ''}" type="button" role="checkbox" aria-checked="${done}" data-id="${it.id}">`
+    + `<span class="rm-box" aria-hidden="true">✓</span>`
+    + `<span class="rm-label">${esc(it.text)}${it.tag ? tagHTML(it.tag) : ''}</span>`
+    + `</button></li>`;
+}
+
+function render() {
+  let html = '';
+  STAGES.forEach(stage => {
+    const done = stage.items.filter(it => state[it.id]).length;
+    const collapsed = collapsedStages.has(stage.id);
+    html += `<section class="cat-section${collapsed ? ' collapsed' : ''}" data-stage="${stage.id}">`
+      + `<button class="cat-head" type="button" aria-expanded="${!collapsed}">`
+      + `<span class="cat-arrow" aria-hidden="true">↓</span>`
+      + `<span>${esc(stage.title)}<span class="rm-time">${esc(stage.time)}</span></span>`
+      + `<span class="rm-count">${done}/${stage.items.length}</span>`
+      + `</button>`
+      + `<div class="cat-body">`
+      + `<p class="rm-desc">${esc(stage.desc)}</p>`
+      + `<ul class="rm-items">` + stage.items.map(itemHTML).join('') + `</ul>`
+      + `</div></section>`;
+  });
+  $('rm-list').innerHTML = html;
+
+  const done = Object.keys(state).length;
+  const pct = TOTAL ? Math.round((done / TOTAL) * 100) : 0;
+  $('rm-done').textContent = done;
+  $('rm-total').textContent = `/${TOTAL}`;
+  $('rm-pct').textContent = `${pct}%`;
+  $('rm-fill').style.width = `${pct}%`;
+  $('rm-bar').setAttribute('aria-valuenow', String(pct));
+}
+
+$('rm-list').addEventListener('click', e => {
+  const item = e.target.closest('.rm-item');
+  if (item) {
+    const id = item.dataset.id;
+    if (state[id]) { delete state[id]; } else { state[id] = 1; }
+    save();
+    render();
+    return;
+  }
+  const head = e.target.closest('.cat-head');
+  if (head) {
+    const section = head.closest('.cat-section');
+    const stage = section.dataset.stage;
+    collapsedStages.has(stage) ? collapsedStages.delete(stage) : collapsedStages.add(stage);
+    render();
+  }
+});
+
+$('rm-reset').addEventListener('click', () => {
+  if (confirm('Tüm ilerleme silinsin mi?')) {
+    state = {};
+    save();
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
