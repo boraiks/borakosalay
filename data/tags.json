@@ -23,6 +23,10 @@
     {
       "name": "qualityassurance",
       "color": "#31ca55"
+    },
+    {
+      "name": "automation",
+      "color": "#0d9088"
     }
   ]
 }
