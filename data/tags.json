@@ -27,6 +27,10 @@
     {
       "name": "automation",
       "color": "#0d9088"
+    },
+    {
+      "name": "llm",
+      "color": "#c084fc"
     }
   ]
 }
