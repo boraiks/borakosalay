@@ -2,11 +2,11 @@
   "items": [
     {
       "name": "datascience",
-      "color": "#8099ff"
+      "color": "#0008eb"
     },
     {
       "name": "llm",
-      "color": "#0f1ef0"
+      "color": "#2e2d2f"
     },
     {
       "name": "embedded",
@@ -22,7 +22,7 @@
     },
     {
       "name": "opensource",
-      "color": "#f34dff"
+      "color": "#8904b9"
     }
   ]
 }
