@@ -2,11 +2,11 @@
   "items": [
     {
       "name": "datascience",
-      "color": "#0008eb"
+      "color": "#2f6fb0"
     },
     {
       "name": "llm",
-      "color": "#ddd727"
+      "color": "#0040ff"
     },
     {
       "name": "embedded",
@@ -14,11 +14,11 @@
     },
     {
       "name": "qualityassurance",
-      "color": "#04cd33"
+      "color": "#00ff04"
     },
     {
       "name": "automation",
-      "color": "#0d9088"
+      "color": "#00b3a7"
     },
     {
       "name": "opensource",
