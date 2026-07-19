@@ -136,6 +136,24 @@
       ],
       "model": "",
       "body": "## Why I Built This\n\nMaking an exploded view by hand is tedious. You select a part, drag it, eyeball the spacing, select the next one, drag it, realise the first one is now in the way, start over. For an assembly with a dozen parts it's twenty minutes of fiddling — and if you change the model, you do it all again.\n\nThere are quick scripts out there that \"explode\" an assembly, but almost all of them do the same thing: move every part the same distance. The assembly separates from itself, sure — but the parts stay stacked on top of one another. You end up with a model that's floating in space and still unreadable.\n\nI wanted the version that actually works: parts should separate **from each other**, not just from the block. The spacing should tell you the assembly order.\n\n![before](/images/uploads/before.png)\n\n![after](/images/uploads/after.png)\n\n## Features\n\n- **One button, one number** — click the toolbar button, type a gap distance, done.\n- **Stepped separation** — the first layer moves one gap, the second moves two, the third moves three. Parts fan out in order instead of moving as a clump.\n- **Layer awareness** — parts sitting at the same height (four bolts on the same face, for example) are treated as one layer and move together. They never get fanned out into a staircase.\n- **Direction awareness** — parts above the reference move up, parts below move down.\n- **Nothing hardcoded** — the gap is asked for at run time, so the same add-in works for a wristwatch and for a chassis.\n- **Lives in the toolbar** — its own tab, next to SOLID and SURFACE, where you'd expect a Fusion tool to be.\n\n## How It Works\n\n### Figuring out where a part actually is\n\nThis turned out to be the first real problem. Fusion will happily tell you a component's transform — but that's the position of the part's _local origin_, and the origin is wherever the person modelling it happened to put it. It might be at the centre of a bolt, or at its tip, or floating fifty millimetres away in empty space because that's where the sketch started.\n\n![](/images/uploads/stepped-vs-fixed.svg)\n\nThat's useless for asking \"is this part above or below the base?\" — a physical question that needs a physical answer. So instead I measure from the **centre of each part's bounding box**, which is computed from the actual geometry. It doesn't care where the origin was parked.\n\n![](/images/uploads/layering.svg)\n\n### Working out the layers\n\nOnce every part has a distance from the reference, they get sorted by that distance. The closest one becomes layer 1, the next distinct height becomes layer 2, and so on. The move distance is simply:\n\n```plain\ndistance = layer number × gap\n```\n\nSo the further up the stack a part sits, the further it travels — and gaps open up between every layer, not just between the parts and the base.\n\n| Layer | Moves |\n| 1 | 1 × gap |\n| 2 | 2 × gap |\n| 3 | 3 × gap |\n\nThe catch: what does \"the same height\" mean?\n\nTwo bolts sitting on the same face don't come back with identical numbers. You get `4.500` and `4.502`, because geometry never lines up perfectly. Compare them for equality and they land in different layers — and your four identical bolts fan out into a staircase.\n\nSo parts within a small tolerance of each other are grouped into one layer. It's a small detail, and it's the difference between an exploded view and a mess."
+    },
+    {
+      "title": "loopgate_harness - CONTRIBUTING.md Updates",
+      "date": "2026-07-17",
+      "category": "Article",
+      "tags": [],
+      "links": [
+        {
+          "label": "GitHub PR",
+          "url": "https://github.com/rxdt/loopgate_harness/pull/25"
+        },
+        {
+          "label": "GitHub Issue",
+          "url": "https://github.com/rxdt/loopgate_harness/issues/20"
+        }
+      ],
+      "model": "",
+      "body": ""
     }
   ]
 }
