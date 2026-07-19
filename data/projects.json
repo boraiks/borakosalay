@@ -141,7 +141,9 @@
       "title": "loopgate_harness - CONTRIBUTING.md Updates",
       "date": "2026-07-17",
       "category": "Contributions",
-      "tags": [],
+      "tags": [
+        "opensource"
+      ],
       "links": [
         {
           "label": "GitHub PR",
