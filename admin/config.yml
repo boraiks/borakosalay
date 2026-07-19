@@ -31,7 +31,7 @@ collections:
             fields:
               - { label: Title, name: title, widget: string }
               - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", picker_utc: true }
-              - { label: Category, name: category, widget: select, options: [Software, Hardware, Concepts, Article] }
+              - { label: Category, name: category, widget: select, options: [Software, Hardware, Concepts, Article, Contributions] }
               - label: Tags
                 name: tags
                 widget: relation
