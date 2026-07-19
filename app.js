@@ -1,4 +1,4 @@
-const categories = ['Software', 'Hardware', 'Concepts', 'Article'];
+const categories = ['Software', 'Hardware', 'Concepts', 'Article', 'Contributions'];
 
 let projects = [];
 let tagColors = {};
