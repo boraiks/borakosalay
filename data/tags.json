@@ -31,6 +31,10 @@
     {
       "name": "llm",
       "color": "#c084fc"
+    },
+    {
+      "name": "opensource",
+      "color": "#ffffff"
     }
   ]
 }
