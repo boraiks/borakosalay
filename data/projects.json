@@ -155,7 +155,7 @@
         }
       ],
       "model": "",
-      "body": "```plain\n### Open Source Contribution: Test Documentation Update\n**Issue:** #20 | **PR:** #25 (Merged)\n\n**Summary**test suites locally using `uv` and `pytest` in a WSL2 environment (`uv run pytest harness/tests`, `uv run harness gate`).\n- Docs-only contribution aimed at enhancing Developer Experience (DX) without altering the core logic.\n```"
+      "body": "### Open Source Contribution: Test Documentation Update\n**Issue:** #20 | **PR:** #25 (Merged)\n\n**Summary**\nImproved developer onboarding by updating the `CONTRIBUTING.md` file to clarify test execution for new contributors. \n\n**Technical Details**\n- Documented the exact location of test fixtures (`harness/tests/`).\n- Added precise test execution commands to the \"Checks\" section.\n- Verified test suites locally using `uv` and `pytest` in a WSL2 environment (`uv run pytest harness/tests`, `uv run harness gate`).\n- Docs-only contribution aimed at enhancing Developer Experience (DX) without altering the core logic."
     }
   ]
 }
