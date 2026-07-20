@@ -155,7 +155,7 @@
         }
       ],
       "model": "",
-      "body": ""
+      "body": "```plain\n### Open Source Contribution: Test Documentation Update\n**Issue:** #20 | **PR:** #25 (Merged)\n\n**Summary**test suites locally using `uv` and `pytest` in a WSL2 environment (`uv run pytest harness/tests`, `uv run harness gate`).\n- Docs-only contribution aimed at enhancing Developer Experience (DX) without altering the core logic.\n```"
     }
   ]
 }
