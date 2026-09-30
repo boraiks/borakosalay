@@ -23,6 +23,10 @@
     {
       "name": "opensource",
       "color": "#8904b9"
+    },
+    {
+      "name": "ai",
+      "color": "#018adf"
     }
   ]
 }
